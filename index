@@ -3,36 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask AJAX Test</title>
+    <title>Hotel Reservations</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <h1>Enviar datos a Flask</h1>
-    <form id="dataForm">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required>
-        <button type="submit">Enviar</button>
-    </form>
-
-    <div id="response"></div>
+    <h1>Hotel Reservations</h1>
+    <button id="fetch-data">Fetch Reservations</button>
+    <div id="results"></div>
 
     <script>
-        document.getElementById('dataForm').addEventListener('submit', async function (e) {
-            e.preventDefault();
-            const nombre = document.getElementById('nombre').value;
-
-            try {
-                const response = await fetch('/api/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
+        $(document).ready(function() {
+            $('#fetch-data').click(function() {
+                $.ajax({
+                    url: '/api/',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({}),
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            $('#results').html(JSON.stringify(response.data, null, 2));
+                        } else {
+                            $('#results').html('Error: ' + response.message);
+                        }
                     },
-                    body: JSON.stringify({ nombre })
+                    error: function(xhr) {
+                        $('#results').html('Error: ' + xhr.responseText);
+                    }
                 });
-                const result = await response.json();
-                document.getElementById('response').innerText = result.message;
-            } catch (error) {
-                document.getElementById('response').innerText = 'Error al enviar la solicitud';
-            }
+            });
         });
     </script>
 </body>
