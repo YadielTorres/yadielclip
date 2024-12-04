@@ -1,10 +1,11 @@
-CREATE TABLE habitaciones (
+CREATE TABLE reservas (
 id INT AUTO_INCREMENT PRIMARY KEY,
-numero_habitacion VARCHAR(10) NOT NULL UNIQUE,
-tipo VARCHAR(50),
-descripcion TEXT,
-precio DECIMAL(10,2) NOT NULL,
-estado VARCHAR(20) DEFAULT 'Disponible',
-imagen VARCHAR(255) -- Ruta a la imagen en el sistema de
-archivos
+cliente_id INT NOT NULL,
+habitacion_id INT NOT NULL,
+fecha_inicio DATE NOT NULL,
+fecha_fin DATE NOT NULL,
+estado VARCHAR(20) DEFAULT 'Activa',
+fecha_reserva DATETIME DEFAULT CURRENT_TIMESTAMP,
+FOREIGN KEY (cliente_id) REFERENCES clientes(id),
+FOREIGN KEY (habitacion_id) REFERENCES habitaciones(id)
 );
