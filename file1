@@ -1,9 +1,26 @@
-REPLACE INTO habitaciones (numero_habitacion, tipo, descripcion,
-precio, estado, imagen, habitacion_id)
-VALUES
-('101', 'Sencilla', 'Habitación sencilla con cama individual',
-50.00, 'Disponible', '/imagenes_habitaciones/101.jpg', 101),
-('201', 'Matrimonial', 'Habitación matrimonial con cama king
-size', 100.00, 'Disponible', '/imagenes_habitaciones/201.jpg',201),
-('202', 'Suite', 'Suite de lujo con vista al mar', 150.00,
-'Disponible', '/imagenes_habitaciones/202.jpg',202),
+# app.py
+from flask import Flask
+from config import Config
+from models import db
+from flask_login import LoginManager
+from routes.auth_routes import auth_bp
+from routes.cliente_routes import cliente_bp
+from routes.habitacion_routes import habitacion_bp
+from routes.reserva_routes import reserva_bp
+app = Flask(__name__)
+app.config.from_object(Config)
+# Configurar la base de datos
+db.init_app(app)
+# Configurar Flask-Login
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'auth.login'
+# Registrar Blueprints
+4
+app.register_blueprint(auth_bp)
+app.register_blueprint(cliente_bp, url_prefix='/clientes')
+app.register_blueprint(habitacion_bp,
+url_prefix='/habitaciones')
+app.register_blueprint(reserva_bp, url_prefix='/reservas')
+if __name__ == '__main__':
+app.run(host='0.0.0.0', port=5000)
