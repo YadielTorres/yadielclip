@@ -1,5 +1,9 @@
-INSERT INTO reservas (cliente_id, habitacion_id, fecha_inicio, fecha_fin, estado)
+REPLACE INTO habitaciones (numero_habitacion, tipo, descripcion,
+precio, estado, imagen, habitacion_id)
 VALUES
-(1, 101, '2023-01-15', '2023-01-20', 'Activa'),
-(2, 201, '2023-02-01', '2023-02-05', 'Activa'),
-(3, 202, '2023-03-10', '2023-03-15', 'Activa');
+('101', 'Sencilla', 'Habitación sencilla con cama individual',
+50.00, 'Disponible', '/imagenes_habitaciones/101.jpg', 101),
+('201', 'Matrimonial', 'Habitación matrimonial con cama king
+size', 100.00, 'Disponible', '/imagenes_habitaciones/201.jpg',201),
+('202', 'Suite', 'Suite de lujo con vista al mar', 150.00,
+'Disponible', '/imagenes_habitaciones/202.jpg',202),
