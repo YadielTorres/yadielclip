@@ -1,0 +1,10 @@
+CREATE TABLE habitaciones (
+id INT AUTO_INCREMENT PRIMARY KEY,
+numero_habitacion VARCHAR(10) NOT NULL UNIQUE,
+tipo VARCHAR(50),
+descripcion TEXT,
+precio DECIMAL(10,2) NOT NULL,
+estado VARCHAR(20) DEFAULT 'Disponible',
+imagen VARCHAR(255) -- Ruta a la imagen en el sistema de
+archivos
+);
