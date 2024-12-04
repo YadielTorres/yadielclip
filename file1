@@ -1,26 +1,7 @@
-# app.py
-from flask import Flask
-from config import Config
-from models import db
-from flask_login import LoginManager
-from routes.auth_routes import auth_bp
-from routes.cliente_routes import cliente_bp
-from routes.habitacion_routes import habitacion_bp
-from routes.reserva_routes import reserva_bp
-app = Flask(__name__)
-app.config.from_object(Config)
-# Configurar la base de datos
-db.init_app(app)
-# Configurar Flask-Login
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = 'auth.login'
-# Registrar Blueprints
-4
-app.register_blueprint(auth_bp)
-app.register_blueprint(cliente_bp, url_prefix='/clientes')
-app.register_blueprint(habitacion_bp,
-url_prefix='/habitaciones')
-app.register_blueprint(reserva_bp, url_prefix='/reservas')
-if __name__ == '__main__':
-app.run(host='0.0.0.0', port=5000)
+# config.py
+class Config:
+SECRET_KEY = 'tu_clave_secreta_aqui'
+MYSQL_HOST = '192.168.1.30' # IP de VM3
+MYSQL_USER = 'hotel_user'
+MYSQL_PASSWORD = 'secure_password'
+MYSQL_DB = 'hotel_reservations'
