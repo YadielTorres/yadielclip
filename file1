@@ -1,7 +1,9 @@
-# config.py
-class Config:
-SECRET_KEY = 'tu_clave_secreta_aqui'
-MYSQL_HOST = '192.168.1.30' # IP de VM3
-MYSQL_USER = 'hotel_user'
-MYSQL_PASSWORD = 'secure_password'
-MYSQL_DB = 'hotel_reservations'
+class Cliente:
+def __init__(self, id, nombre, direccion, telefono, email,
+fecha_registro):
+self.id = id
+self.nombre = nombre
+self.direccion = direccion
+self.telefono = telefono
+self.email = email
+self.fecha_registro = fecha_registro
