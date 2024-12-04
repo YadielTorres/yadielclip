@@ -1,10 +1,11 @@
-# models/usuario.py
-from flask_login import UserMixin
-class Usuario(UserMixin):
-def __init__(self, id, email, password, nombre, rol):
-self.id = id
-self.email = email
-self.password = password
-10
-self.nombre = nombre
-self.rol = rol # 'cliente' o 'admin'
+@login_manager.user_loader
+def load_user(user_id):
+cursor = db.connection.cursor()
+cursor.execute("SELECT * FROM usuarios WHERE id = %s",
+(user_id,))
+row = cursor.fetchone()
+if row:
+return Usuario(id=row[0], email=row[1], password=row[2],
+nombre=row[3], rol=row[4])
+else:
+return None
