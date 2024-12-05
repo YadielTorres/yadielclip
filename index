@@ -1,37 +1,18 @@
+<!-- index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Reservations</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Meta y enlaces a CSS -->
 </head>
 <body>
-    <h1>Hotel Reservations</h1>
-    <button id="fetch-data">Fetch Reservations</button>
-    <div id="results"></div>
-
-    <script>
-        $(document).ready(function() {
-            $('#fetch-data').click(function() {
-                $.ajax({
-                    url: '/api/',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({}),
-                    success: function(response) {
-                        if (response.status === 'success') {
-                            $('#results').html(JSON.stringify(response.data, null, 2));
-                        } else {
-                            $('#results').html('Error: ' + response.message);
-                        }
-                    },
-                    error: function(xhr) {
-                        $('#results').html('Error: ' + xhr.responseText);
-                    }
-                });
-            });
-        });
-    </script>
+<!-- Header -->
+<!--#include file="header.html" -->
+<!-- Contenido principal -->
+<div class="container">
+<!-- Aquí va el contenido -->
+</div>
+<!-- Footer -->
+<!--#include file="footer.html" -->
+<!-- Enlaces a JavaScript -->
 </body>
 </html>
