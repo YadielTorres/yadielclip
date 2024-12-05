@@ -1,4 +1,6 @@
-// assets/js/main.js
-$(document).ready(function() {
-// Código común para todas las páginas
-});
+/* assets/css/styles.css */
+/* Estilos personalizados */
+body {
+padding-top: 70px;
+4
+}
