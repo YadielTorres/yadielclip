@@ -1,18 +1,24 @@
 @habitacion_bp.route('/disponibles', methods=['GET'])
 def get_habitaciones_disponibles():
-    cursor = db.connection.cursor()
-    cursor.execute("SELECT * FROM habitaciones WHERE estado ='Disponible'")
-    rows = cursor.fetchall()
-    habitaciones = []
-    for row in rows:
-        habitacion = {
-            'id': row[0],
-            'numero_habitacion': row[1],
-            'tipo': row[2],
-            'descripcion': row[3],
-            'precio': float(row[4]),
-            'estado': row[5],
-            'imagen': row[6]
-        }
-        habitaciones.append(habitacion)
-    return jsonify (habitaciones)
+    try:
+        with db.connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM habitaciones WHERE estado = 'Disponible'")
+            rows = cursor.fetchall()
+        
+        habitaciones = [
+            {
+                'id': row[0],
+                'numero_habitacion': row[1],
+                'tipo': row[2],
+                'descripcion': row[3],
+                'precio': float(row[4]),
+                'estado': row[5],
+                'imagen': row[6]
+            }
+            for row in rows
+        ]
+        
+        return jsonify(habitaciones), 200  # Return JSON with a 200 OK status
+    
+    except Exception as e:
+        return jsonify({'error': 'Error fetching habitaciones disponibles', 'details': str(e)}), 500
